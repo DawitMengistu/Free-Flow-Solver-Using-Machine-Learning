@@ -2,6 +2,8 @@
 data
 dsconverted
 source
-Web
 ds
 *.npy
+Train
+node_modules
+*deleteme

@@ -41,23 +41,15 @@ def map_values_from_range(input_array, max_value):
 
 # Initialize the second layer with 16 neurons
 n_inputs = 36  # Assuming input size from MNIST dataset
-n_neurons_layer2 = 36
+n_neurons_layer2 = 9
 n_neurons_output = 36
 
 
-lr = 0.5
+lr = 0.1
 
 
 def sigmoid(x):
     return 1 / (1 + np.exp(-x))
-
-
-def sigmoid_derivative(x):
-    return x * (1 - x)
-
-
-def calculateErr(result, aim):
-    return 0.5 * ((aim - result) ** 2)
 
 
 class Activation_Sigmoid:
@@ -66,6 +58,14 @@ class Activation_Sigmoid:
 
     def backward(self, dvalues):
         self.dinputs = dvalues * sigmoid_derivative(self.output)
+
+
+def sigmoid_derivative(x):
+    return x * (1 - x)
+
+
+def calculateErr(result, aim):
+    return 0.5 * ((aim - result) ** 2)
 
 
 # Softmax activation
@@ -106,7 +106,8 @@ class Layer_Dense_Load:
         self.output = np.dot(inputs, self.weights) + self.biases
 
  # Save wegiths / biases as Json
- 
+
+
 # layer1 = Layer_Dense(n_inputs, n_neurons_layer2)
 # layer2 = Layer_Dense(n_neurons_layer2, n_neurons_output)
 
@@ -140,70 +141,77 @@ layer1 = Layer_Dense(n_inputs, n_neurons_layer2)
 layer2 = Layer_Dense(n_neurons_layer2, n_neurons_output)
 
 
-layer1 = Layer_Dense_Load(
-    n_inputs, n_neurons_layer2, "trained_data/layer1_weights.npy", "trained_data/layer1_biases.npy")
-layer2 = Layer_Dense_Load(
-    n_neurons_layer2, n_neurons_output, "trained_data/layer2_weights.npy", "trained_data/layer2_biases.npy")
+# layer1 = Layer_Dense_Load(
+#     n_inputs, n_neurons_layer2, "trained_data/layer1_weights.npy", "trained_data/layer1_biases.npy")
+# layer2 = Layer_Dense_Load(
+#     n_neurons_layer2, n_neurons_output, "trained_data/layer2_weights.npy", "trained_data/layer2_biases.npy")
 
-batch_size = 200
-num_batches = len(puzzles_array)
-num_epochs = 0
+for z in range(2000):
+    perm = np.random.permutation(len(puzzles_array))
+    puzzles_array = puzzles_array[perm]
+    answers_array = answers_array[perm]
 
-for epoch in range(num_epochs):
-    total_error = 0
-    for batch in range(num_batches):
-        batch_start = batch * batch_size
-        batch_end = batch_start + batch_size
+    batch_size = 100
+    num_batches = len(puzzles_array)
+    num_epochs = 100
 
-        dW1_sum = np.zeros_like(layer1.weights)
-        dB1_sum = np.zeros_like(layer1.biases)
-        dW2_sum = np.zeros_like(layer2.weights)
-        dB2_sum = np.zeros_like(layer2.biases)
+    for epoch in range(num_epochs):
+        total_error = 0
+        for batch in range(num_batches):
+            batch_start = batch * batch_size
+            batch_end = batch_start + batch_size
 
-        for i in range(batch_start, batch_end):
-            if (i < 200):
-                layer1.forward(puzzles_array[i].flatten())
-                activation1 = Activation_Sigmoid()
-                activation1.forward(layer1.output)
+            dW1_sum = np.zeros_like(layer1.weights)
+            dB1_sum = np.zeros_like(layer1.biases)
+            dW2_sum = np.zeros_like(layer2.weights)
+            dB2_sum = np.zeros_like(layer2.biases)
 
-                layer2.forward(activation1.output)
-                activation2 = Activation_Sigmoid()
-                activation2.forward(layer2.output)
+            for i in range(batch_start, batch_end):
+                if (i < 200):
+                    layer1.forward(puzzles_array[i].flatten())
+                    activation1 = Activation_Sigmoid()
+                    activation1.forward(layer1.output)
 
-                outputLayer = activation2.output
+                    layer2.forward(activation1.output)
+                    activation2 = Activation_Sigmoid()
+                    activation2.forward(layer2.output)
 
-                max_range = np.max(answers_array[i].flatten())
-                target = scale_to_range(answers_array[i].flatten(), max_range)
-                error = calculateErr(outputLayer, target)
-                total_error += np.sum(error)
+                    outputLayer = activation2.output
 
-                dOut = -(target - outputLayer)
-                activation2.backward(dOut)
-                dNet2 = activation2.dinputs
+                    max_range = np.max(answers_array[i].flatten())
+                    target = scale_to_range(
+                        answers_array[i].flatten(), max_range)
+                    error = calculateErr(outputLayer, target)
+                    total_error += np.sum(error)
 
-                dW2_sum += np.outer(activation1.output, dNet2)
-                dB2_sum += dNet2
+                    dOut = -(target - outputLayer)
+                    activation2.backward(dOut)
+                    dNet2 = activation2.dinputs
 
-                dA1 = np.dot(dNet2, layer2.weights.T)
-                activation1.backward(dA1)
-                dNet1 = activation1.dinputs
+                    dW2_sum += np.outer(activation1.output, dNet2)
+                    dB2_sum += dNet2
 
-                dW1_sum += np.outer(puzzles_array[i].flatten(), dNet1)
-                dB1_sum += dNet1
+                    dA1 = np.dot(dNet2, layer2.weights.T)
+                    activation1.backward(dA1)
+                    dNet1 = activation1.dinputs
 
-        layer2.weights -= lr * (dW2_sum / batch_size)
-        layer2.biases -= lr * (dB2_sum / batch_size)
-        layer1.weights -= lr * (dW1_sum / batch_size)
-        layer1.biases -= lr * (dB1_sum / batch_size)
-    if (epoch % 1000 == 0):
-        print(f"Epoch {epoch + 1}, Total Error: {total_error / num_batches}")
-        # Save weights and biases for layer 1
-        np.save('trained_data/layer1_weights.npy', layer1.weights)
-        np.save('trained_data/layer1_biases.npy', layer1.biases)
+                    dW1_sum += np.outer(puzzles_array[i].flatten(), dNet1)
+                    dB1_sum += dNet1
 
-        # Save weights and biases for layer 2
-        np.save('trained_data/layer2_weights.npy', layer2.weights)
-        np.save('trained_data/layer2_biases.npy', layer2.biases)
+            layer2.weights -= lr * (dW2_sum / batch_size)
+            layer2.biases -= lr * (dB2_sum / batch_size)
+            layer1.weights -= lr * (dW1_sum / batch_size)
+            layer1.biases -= lr * (dB1_sum / batch_size)
+        if (epoch % 10 == 0):
+            print(
+                f"Epoch {epoch + 1}, Total Error: {total_error / num_batches}")
+            # Save weights and biases for layer 1
+            np.save('trained_data/layer1_weights.npy', layer1.weights)
+            np.save('trained_data/layer1_biases.npy', layer1.biases)
+
+            # Save weights and biases for layer 2
+            np.save('trained_data/layer2_weights.npy', layer2.weights)
+            np.save('trained_data/layer2_biases.npy', layer2.biases)
 
 for i in range(0):
     epochs = 15

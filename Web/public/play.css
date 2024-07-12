@@ -1,0 +1,118 @@
+:root {
+    --red: #FF0000;
+    --yellow: #EEEE00;
+    --green: #008000;
+    --blue: #0000FF;
+    --purple: #800080;
+    --orange: #FF7F00;
+    --pink: #FF00FF;
+}
+
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: black;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    box-sizing: border-box;
+}
+
+.con {
+    width: 100%;
+}
+
+
+.grid-con {
+    display: grid;
+    grid-template-columns: repeat(6, 46px);
+    margin: 20px;
+}
+
+.single-grid-puzzle {
+    height: 46px;
+    width: 100%;
+    border: solid 1px #5C5F30;
+    background-color: black;
+    /* background-color: rgb(123, 123, 123); */
+    position: relative;
+
+}
+
+.inner-line {
+    width: 20px;
+    height: 20px;
+    background-color: rgb(90, 90, 90);
+    position: absolute;
+    z-index: 2;
+}
+
+.up-line {
+    height: 23px;
+    right: calc(50% - 10px);
+}
+
+.down-line {
+    height: 23px;
+    /* background-color: rgb(214, 119, 119); */
+    right: calc(50% - 10px);
+    bottom: 0;
+}
+
+.left-line {
+    width: 23px;
+    /* background-color: rgb(155, 214, 119); */
+    top: calc(50% - 10px);
+    left: 0;
+}
+
+.right-line {
+    width: 23px;
+    /* background-color: rgb(155, 214, 119); */
+    top: calc(50% - 10px);
+    right: 0;
+}
+
+
+.point {
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    right: calc(50% - 15px);
+    top: calc(50% - 15px);
+    z-index: 3;
+}
+
+
+
+
+.red {
+    background-color: var(--red);
+}
+
+.yellow {
+    background-color: var(--yellow);
+}
+
+.green {
+    background-color: var(--green);
+}
+
+.blue {
+    background-color: var(--blue);
+}
+
+.purple {
+    background-color: var(--purple);
+}
+
+.orange {
+    background-color: var(--orange);
+}
+
+.pink {
+    background-color: var(--pink);
+}

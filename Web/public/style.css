@@ -1,0 +1,101 @@
+:root {
+    --size: 5px;
+    --red: #;
+    --yellow: #EEEE00;
+    --green: #008000;
+    --blue: #0000FF;
+    --purple: #800080;
+    --orange: #FF7F00;
+    --pink: #FF00FF;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #484848;
+    height: 100vh;
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Libre Baskerville', serif;
+}
+
+.con-con {}
+
+.con {
+    display: grid;
+    grid-template-columns: 1fr 1fr auto;
+}
+
+p {
+    padding: 0;
+    margin: 0;
+}
+
+.result {
+    font-size: 200px;
+}
+
+.canvas,
+.canvas2 {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    width: 280px;
+    height: 280px;
+    margin: 20px;
+}
+
+.point {
+    width: 70%;
+    height: 70%;
+    border-radius: 50%;
+    margin: auto;
+    margin-top: 13%;
+}
+
+.pridiction {
+    border: solid 1px #757575;
+    width: 280px;
+    height: 280px;
+    margin: 20px;
+    display: grid;
+    align-items: center;
+    justify-content: center;
+}
+
+
+
+.single-grid-puzzle,
+.single-grid-answer {
+
+    height: 100%;
+    width: 100%;
+    border: solid 1px #5C5F30;
+    background-color: black;
+}
+
+
+.on {
+    background-color: white;
+}
+
+.btn-con {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 10px;
+    margin-top: 20px;
+    margin-inline: 20px;
+}
+
+.btns:hover {
+    cursor: pointer;
+}
+
+.btns {
+    padding-block: 5px;
+    width: 100px;
+}
+
+.result-pro {
+    font-size: 17px;
+}

@@ -2,8 +2,8 @@ import numpy as np
 from PIL import Image, ImageDraw
 
 # Load the .npy file
-matrix2 = np.load('ds/g-66-54.npy')
-matrix = np.load('ds/a-66-54.npy')
+matrix = np.load('ds/g-66-236.npy')
+matrix2 = np.load('ds/a-66-236.npy')
 
 print(matrix)
 
