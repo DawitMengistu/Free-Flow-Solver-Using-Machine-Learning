@@ -35,7 +35,6 @@ body {
     height: 46px;
     width: 100%;
     border: solid 1px #5C5F30;
-    background-color: black;
     /* background-color: rgb(123, 123, 123); */
     position: relative;
 
@@ -115,4 +114,8 @@ body {
 
 .pink {
     background-color: var(--pink);
+}
+
+.white {
+    background-color: white;
 }

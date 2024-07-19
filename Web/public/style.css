@@ -12,19 +12,34 @@
 body {
     margin: 0;
     padding: 0;
-    background-color: #484848;
+    background-color: #000000;
     height: 100vh;
     display: grid;
     align-items: center;
     justify-content: center;
     font-family: 'Libre Baskerville', serif;
+    overflow: hidden;
 }
 
-.con-con {}
+.con-con {
+    margin-bottom: 100px;
+}
+
+.bg-line-con {
+    background-color: #5C5F30;
+}
+
+.single-line {
+    position: absolute;
+    border-radius: 30px;
+    opacity: 0.08;
+    z-index: -2;
+}
+
 
 .con {
     display: grid;
-    grid-template-columns: 1fr 1fr auto;
+    grid-template-columns: 1fr 1fr 1fr;
 }
 
 p {
@@ -37,7 +52,8 @@ p {
 }
 
 .canvas,
-.canvas2 {
+.canvas2,
+.canvas3 {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
     width: 280px;
@@ -64,9 +80,20 @@ p {
 }
 
 
+.top-text {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    color: white;
+    font-family: 'Libre Baskerville', serif;
+}
+
+.top-text div {
+    margin-left: 20px;
+}
 
 .single-grid-puzzle,
-.single-grid-answer {
+.single-grid-answer,
+.single-grid-pridiction {
 
     height: 100%;
     width: 100%;
@@ -89,13 +116,55 @@ p {
 
 .btns:hover {
     cursor: pointer;
+    background-color: #b3b3b3;
 }
 
 .btns {
+    border: none;
     padding-block: 5px;
     width: 100px;
 }
 
 .result-pro {
     font-size: 17px;
+}
+
+
+
+
+
+
+
+
+
+.red {
+    background-color: var(--red);
+}
+
+.yellow {
+    background-color: var(--yellow);
+}
+
+.green {
+    background-color: var(--green);
+}
+
+.blue {
+    background-color: var(--blue);
+}
+
+.purple {
+    background-color: var(--purple);
+}
+
+.orange {
+    background-color: var(--orange);
+}
+
+.pink {
+    background-color: var(--pink);
+}
+
+.white {
+    background-color: white;
 }
