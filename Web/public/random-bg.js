@@ -48,14 +48,12 @@ setInterval(() => {
         ele = lines[i];
         if (ele.classList.contains("hor")) {
             if (horArr[indexH][0] >= (window.innerWidth + parseInt(ele.style.width, 10))) {
-                console.log("I'm here")
                 horArr[indexH][0] = - parseInt(ele.style.width, 10);
             }
             horArr[indexH][0] += speed[i];
             indexH += 1;
         } else {
             if (verArr[indexV][1] >= (window.innerHeight + parseInt(ele.style.height, 10))) {
-                console.log("I'm here")
                 verArr[indexV][1] = - parseInt(ele.style.height, 10);
             }
             verArr[indexV][1] += speed[i];

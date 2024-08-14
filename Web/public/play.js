@@ -9,7 +9,7 @@ let game = [[0, 0, 1, 2, 3, 4],
 let gameGrid = game;
 
 
-let colors = ["red", "yellow", "green", "blue", "purple", "orange", "pink", "white"]
+// let colors = ["red", "yellow", "green", "blue", "purple", "orange", "pink", "white"]
 
 
 

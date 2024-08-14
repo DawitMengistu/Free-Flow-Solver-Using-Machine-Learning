@@ -17,7 +17,7 @@ for a in range (4):
         # Reshape the array to a 2D array of pixels (rows) by RGB values (columns)
         reshaped_array = img_array.reshape((-1, 3))
 
-        # Perform K-Means clustering
+        #   
         num_clusters = 10  # Example number of clusters
         kmeans = KMeans(n_clusters=num_clusters, random_state=0)
         labels = kmeans.fit_predict(reshaped_array)
