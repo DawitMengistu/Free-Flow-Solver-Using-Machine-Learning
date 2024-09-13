@@ -3,7 +3,7 @@
 ![image](https://github.com/user-attachments/assets/3f85b130-d897-46a9-8a8a-f25bde2b8dd9)
 
 
-To play Flow Free, connect matching colors with a pipe to create a Flow®. Pair all colors and cover the entire board to solve each puzzle. Ensure the entire board is filled with pipes that do not cross or overlap, Successfully connect all colors and cover the board to complete the puzzle. Enjoy the challenge of creating your Flow!
+To play Free Flow, connect matching colors with a pipe to create a Flow®. Pair all colors and cover the entire board to solve each puzzle. Ensure the entire board is filled with pipes that do not cross or overlap, Successfully connect all colors and cover the board to complete the puzzle. Enjoy the challenge of creating your Flow!
 
 ## Collecting data
 
